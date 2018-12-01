@@ -6,11 +6,11 @@ Installer python sur Ubuntu:
 - `sudo apt install python3-pip`
 
 Installer les dependances python necessaires (Peut prendre 5 min):
-- `pip install -r requirements.txt`
+- `pip3 install -r requirements.txt`
 >Note: si vous avez python 2 et 3, il faut remplacer la commande pip par pip3.
 
 Commencer le serveur python:
-- `python server.py`
+- `python3 server.py`
 
 Commencer le client python:
-- `python client.py`
+- `python3 client.py`
