@@ -22,7 +22,6 @@ def main():
 	r = requests.get(API_SERVER_URL + "/freqProducts")
 	print(r.text)
 	
-	"""
 	print("CALLING " + API_SERVER_URL + "/facture")
 	r = requests.post(API_SERVER_URL + "/facture", json=facture)
 	print(r.text)
@@ -30,7 +29,6 @@ def main():
 	print("CALLING " + API_SERVER_URL + "/freqProducts")
 	r = requests.get(API_SERVER_URL + "/freqProducts")
 	print(r.text)
-	"""
 
 if __name__ == '__main__':
 	main()
