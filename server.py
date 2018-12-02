@@ -6,8 +6,9 @@ from cassandra.cluster import Cluster
 from pyspark import SparkContext, SparkConf
 from pyspark.sql import SQLContext, Row
 from pyspark.mllib.fpm import FPGrowth
+import os
 
-conf = SparkConf().setAppName('AppMagasin').setMaster('spark://gabriel-VirtualBox:7077')
+conf = SparkConf().setAppName('AppMagasin').setMaster('spark://' + os.uname()[1] + ':7077')
 conf.set("spark.jars.packages","anguenot:pyspark-cassandra:0.9.0")
 sc = SparkContext(conf=conf)
 sqlContext = SQLContext(sc)
