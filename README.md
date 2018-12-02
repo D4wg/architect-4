@@ -1,6 +1,8 @@
 # TP4 ARCHITECTURE
 > Intégration de spark dans un service RESTful écrit en python 2.7.
 
+Video YouTube: https://www.youtube.com/watch?v=3hgvnG7Rtiw&feature=youtu.be
+
 ## Pre requis
 1. Sur ubuntu 18.04, avoir git et python2 avec pip avec les commandes suivantes:
     - `sudo apt update`
