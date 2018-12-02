@@ -4,10 +4,11 @@
 from flask import Flask, jsonify, request
 from cassandra.cluster import Cluster
 from pyspark import SparkContext, SparkConf
-from pyspark.sql import SQLContext
+from pyspark.sql import SQLContext, Row
+from pyspark.mllib.fpm import FPGrowth
 
-conf = SparkConf().setAppName('appName').setMaster('spark://gabriel-VirtualBox:7077')
-#conf.set("spark.jars.packages","anguenot:pyspark-cassandra:0.9.0")
+conf = SparkConf().setAppName('AppMagasin').setMaster('spark://gabriel-VirtualBox:7077')
+conf.set("spark.jars.packages","anguenot:pyspark-cassandra:0.9.0")
 sc = SparkContext(conf=conf)
 sqlContext = SQLContext(sc)
 
@@ -21,7 +22,7 @@ CASSANDRA_SERVER_IP = "localhost"
 #	A NE PAS MODIFIER
 ###
 app = Flask(__name__)
-cluster = Cluster([CASSANDRA_SERVER_IP], port=9042)
+cluster = Cluster()
 session = cluster.connect()
 
 
@@ -44,21 +45,22 @@ def accept_facture():
 
 @app.route('/api/freqProducts', methods=['GET'])
 def freq_products():
-	factures = sqlContext.read \
-		.format("org.apache.spark.sql.cassandra") \
-		.options(table="facture", keyspace="magasin") \
-		.load()
+	try:
+		factures = sqlContext.read \
+			.format("org.apache.spark.sql.cassandra") \
+			.options(table="facture", keyspace="magasin") \
+			.load()
+		
+		factures.show()
 
-	factures.show();
+		model = FPGrowth.train(factures.rdd.map(lambda x: list(set(x))), minSupport=0.2, numPartitions=10)
+		result = model.freqItemsets().collect()
+		for fi in result:
+			print(fi)
+	except Exception as e:
+		print(e)
 
-	future = session.execute_async("SELECT * FROM facture")
-	rows = future.result()
-
-	ret = []
-	for res in rows:
-		ret.append({"factureID": res.factureid, "productID": res.productid, "price": res.price, "qty": res.qty})
-
-	return jsonify(ret)
+	return jsonify(result)
 
 
 if __name__ == '__main__':
