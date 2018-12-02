@@ -4,20 +4,28 @@
 from flask import Flask, jsonify, request, Response
 from pyspark import SparkContext, SparkConf
 from pyspark.sql import SQLContext, SparkSession
-import pymongo, json
 from bson.json_util import dumps
 from bson import json_util
+import pymongo, json
+import os
+
 
 ##############################################
 #	CE QUE VOUS POUVEZ MODIFIER
 ###
 MONGODB_IP="mongodb://tp4:tp4tp4@ds044587.mlab.com:44587/architecture-tp4"
 MONGO_CLIENT="architecture-tp4"
-SPARK_MASTER="spark://dawg-VirtualBox:7077"
+SPARK_MASTER="spark://" + os.uname()[1] + ":7077"
 
 ##############################################
 #	A NE PAS MODIFIER
 ###
+print("######## Server config ###########")
+print("Mongo db ip:  " + MONGODB_IP)
+print("Mongo client: " + MONGO_CLIENT)
+print("Spark master: " + SPARK_MASTER)
+print("##################################")
+
 conf = SparkConf()
 conf.setAppName('appMagasin')
 conf.setMaster(SPARK_MASTER)
@@ -58,6 +66,5 @@ def freq_products():
 	return Response(data, mimetype='application/json')
 
 if __name__ == '__main__':
-	x = mycol.delete_many({})
 	app.run()
 
