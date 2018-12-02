@@ -11,9 +11,6 @@ from bson import json_util
 conf = SparkConf()
 conf.setAppName('appMagasin')
 conf.setMaster('spark://dawg-VirtualBox:7077')
-#conf.set('spark.executor.memory', '2g')
-#conf.set('spark.executor.cores', '2')
-#conf.set('spark.executor.instances', '2')
 
 #conf.set("spark.jars.packages","anguenot:pyspark-cassandra:0.9.0")
 #sc = SparkContext(conf=conf)
