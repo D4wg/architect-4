@@ -3,6 +3,12 @@
 """
 from flask import Flask, jsonify, request
 from cassandra.cluster import Cluster
+from pyspark import SparkContext, SparkConf
+from pyspark.sql import SQLContext
+conf = SparkConf().setAppName('appName').setMaster('spark://gabriel-VirtualBox:7077')
+sc = SparkContext(conf=conf)
+sqlContext = SQLContext(sc)
+
 
 ##############################################
 #	CE QUE VOUS POUVEZ MODIFIER
@@ -36,6 +42,13 @@ def accept_facture():
 
 @app.route('/api/freqProducts', methods=['GET'])
 def freq_products():
+	factures = sqlContext.read \
+		.format("org.apache.spark.sql.cassandra") \
+		.options(table="facture", keyspace="magasin") \
+		.load()
+
+	factures.show();
+
 	future = session.execute_async("SELECT * FROM facture")
 	rows = future.result()
 
