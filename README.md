@@ -1,15 +1,14 @@
-Prereq: `jdk8-openjdk jre8-openjdk`
+# TP4 ARCHITECTURE
 
-Installer python sur Ubuntu:
-- `sudo apt install update`
-- `sudo apt install python3`
-- `sudo apt install python3-pip`
+## Pre requis
+1. Sur ubuntu 18.04 faire:
+    - `sudo apt update`
+    - `sudo apt install git python3-pip`
+2. Aller dans ce dossier et roulez la commande suivante (Peut prendre 5 min):
+    - `pip3 install -r requirements.txt`
+3. Installer Cassendra et le rouler si ce n'est pas fait en localhost.
 
-Installer les dependances python necessaires (Peut prendre 5 min):
-- `pip3 install -r requirements.txt`
-
-Assurer que le service de cassandra roule. Par defaut, le serveur va prendre localhost.
-
+## Rouler le service et le client
 Commencer le serveur python:
 - `python3 server.py`
 
