@@ -22,7 +22,7 @@ def main():
 		print("a: Ajouter une facture")
 		print("r: Recuperer les items frequents")
 		print("================================")
-		usrInput = input("Choice: ")
+		usrInput = raw_input("Choice: ")
 
 		if (usrInput == "a"):
 			endFactureInput = "o"
@@ -30,13 +30,12 @@ def main():
 
 			while endFactureInput == "o":
 				obj = {}
-				obj["productID"] = int(input("Id du produit (int): "))
-				obj["price"] = float(input("Prix (float): "))
-				obj["qty"] = int(input("Quantite (int): "))
+				obj["productID"] = int(raw_input("Id du produit (int): "))
+				obj["price"] = float(raw_input("Prix (float): "))
+				obj["qty"] = int(raw_input("Quantite (int): "))
 				ret.append(obj)
 
-				print("continuer? (o/n)")
-				endFactureInput = input()
+				endFactureInput = raw_input("continuer? (o/n)")
 
 			print("CALLING " + API_SERVER_URL + "/facture")
 			r = requests.post(API_SERVER_URL + "/facture", json=ret)
