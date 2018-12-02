@@ -1,5 +1,5 @@
 # TP4 ARCHITECTURE
-> Intégration de spark dans un service rest écrit en python 2.7.
+> Intégration de spark dans un service RESTful écrit en python 2.7.
 
 ## Pre requis
 1. Sur ubuntu 18.04, avoir git et python2 avec pip avec les commandes suivantes:
@@ -13,7 +13,7 @@
 4. Installer Cassendra et le rouler si ce n'est pas fait en localhost.
 5. [Installer Spark 2.4.0](https://medium.com/@josemarcialportilla/installing-scala-and-spark-on-ubuntu-5665ee4b62b1)
 6. Dans le dossier spark (/opt/spark/).
-    - ajouter dans un fichier spark-env.sh situé dans le dossier conf/:
+    - Ajouter dans un fichier spark-env.sh situé dans le dossier conf/:
         >SPARK_WORKER_INSTANCES=2
 
         >SPARK_WORKER_CORES=1
