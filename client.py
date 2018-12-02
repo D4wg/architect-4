@@ -22,7 +22,7 @@ def main():
 		print("a: Ajouter une facture")
 		print("r: Recuperer les items frequents")
 		print("================================")
-		usrInput = input()
+		usrInput = input("Choice: ")
 
 		if (usrInput == "a"):
 			endFactureInput = "o"
@@ -30,12 +30,9 @@ def main():
 
 			while endFactureInput == "o":
 				obj = {}
-				print("Id du produit (int): ")
-				obj["productID"] = input()
-				print("Prix (float): ")
-				obj["price"] = input()
-				print("Quantite (int): ")
-				obj["qty"] = input()
+				obj["productID"] = int(input("Id du produit (int): "))
+				obj["price"] = float(input("Prix (float): "))
+				obj["qty"] = int(input("Quantite (int): "))
 				ret.append(obj)
 
 				print("continuer? (o/n)")
