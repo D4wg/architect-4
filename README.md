@@ -13,4 +13,5 @@ Commencer le serveur python:
 - `python3 server.py`
 
 Commencer le client python:
+
 - `python3 client.py`
