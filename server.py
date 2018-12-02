@@ -3,29 +3,33 @@
 """
 from flask import Flask, jsonify, request, Response
 from pyspark import SparkContext, SparkConf
-from pyspark.sql import SQLContext
+from pyspark.sql import SQLContext, SparkSession
 import pymongo, json
 from bson.json_util import dumps
 from bson import json_util
 
-conf = SparkConf()
-conf.setAppName('appMagasin')
-conf.setMaster('spark://dawg-VirtualBox:7077')
-
-#conf.set("spark.jars.packages","anguenot:pyspark-cassandra:0.9.0")
-#sc = SparkContext(conf=conf)
-#sqlContext = SQLContext(sc)
-
 ##############################################
 #	CE QUE VOUS POUVEZ MODIFIER
 ###
-myclient = pymongo.MongoClient("mongodb://tp4:tp4tp4@ds044587.mlab.com:44587/architecture-tp4")
-mydb = myclient["architecture-tp4"]
+MONGODB_IP="mongodb://tp4:tp4tp4@ds044587.mlab.com:44587/architecture-tp4"
+MONGO_CLIENT="architecture-tp4"
+SPARK_MASTER="spark://dawg-VirtualBox:7077"
 
 ##############################################
 #	A NE PAS MODIFIER
 ###
+conf = SparkConf()
+conf.setAppName('appMagasin')
+conf.setMaster(SPARK_MASTER)
+conf.set("spark.mongodb.input.uri", MONGODB_IP)
+conf.set("spark.mongodb.output.uri", MONGODB_IP)
+conf.set("spark.jars.packages","org.mongodb.spark:mongo-spark-connector_2.11:2.2.5")
+sc = SparkContext(conf=conf)
+sqlContext = SQLContext(sc)
+
 app = Flask(__name__)
+myclient = pymongo.MongoClient(MONGODB_IP)
+mydb = myclient[MONGO_CLIENT]
 mycol = mydb["magasin"]
 
 class MongoJsonEncoder(json.JSONEncoder):
