@@ -5,7 +5,9 @@ from flask import Flask, jsonify, request
 from cassandra.cluster import Cluster
 from pyspark import SparkContext, SparkConf
 from pyspark.sql import SQLContext
+
 conf = SparkConf().setAppName('appName').setMaster('spark://gabriel-VirtualBox:7077')
+#conf.set("spark.jars.packages","anguenot:pyspark-cassandra:0.9.0")
 sc = SparkContext(conf=conf)
 sqlContext = SQLContext(sc)
 
