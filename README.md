@@ -9,7 +9,7 @@
     - `git clone https://github.com/D4wg/architect-4.git`
 3. Roulez les commandes suivantes (Peut prendre 5 min):
     - `cd architect-4/`
-    - `pip install -r requirements.txt`
+    - `sudo pip install -r requirements.txt`
 4. Installer Cassendra et le rouler si ce n'est pas fait en localhost.
 5. [Installer Spark 2.4.0](https://medium.com/@josemarcialportilla/installing-scala-and-spark-on-ubuntu-5665ee4b62b1)
 6. Dans le dossier spark (/opt/spark/).
